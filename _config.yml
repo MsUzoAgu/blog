@@ -7,7 +7,7 @@
 # https://learnxinyminutes.com/docs/yaml/
 
 title: mua
-description: random notes at the intersection of technology, art, and the humanities.
+description: notes at the intersection of technology, art, and the humanities.
 github_username: msuzoagu
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "blog"
