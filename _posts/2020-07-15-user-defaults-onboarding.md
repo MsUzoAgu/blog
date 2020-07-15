@@ -19,33 +19,17 @@ I find **UserDefaults** very useful for determine things like:
 We all have to deal with onboarding at some point so below are general steps to get one started.
 
 1. create a boolean flag in the coordinator responsible for handling the OnBoarding flow: 
-  ```swift
-  class AppCoordinator: Coordinator {
+```swift
+class AppCoordinator: Coordinator {
 
-      func start() {
-          let isFirstTimeUser = UserDefaults.standard.bool(forKey: "isFirstTimeUser")
-          
-          if (isFirstTimeUser) {
-              presentOnboarding()
-          } else {
-              presentDefaultFlow()
-          }
-      }  
-  }
-  ``` 
-  Substitue coordinator for AppDelegate/SceneDelegate if you don't follow the coordinator pattern:
-    
-  ```swift 
-  class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
-    //MARK: Instance functions
-    func functionThatDeterminesWhatVCToPresent() {
-      let isFirstTimeUser = UserDefaults.standard.bool(forKey: "isFirstTimeUser")
-      if (isFirstTimeUser) {
-        presentOnboarding()
-      } else {
-        presentDefaultFlow()
-      }
+    func start() {
+        let isFirstTimeUser = UserDefaults.standard.bool(forKey: "isFirstTimeUser")
+        
+        if (isFirstTimeUser) {
+            presentOnboarding()
+        } else {
+            presentDefaultFlow()
+        }
     }  
-  }
-  ```
+}
+``` 
