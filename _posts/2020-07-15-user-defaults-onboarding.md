@@ -19,17 +19,4 @@ I find **UserDefaults** very useful for determine things like:
 We all have to deal with onboarding at some point so below are general steps to get one started.
 
 1. create a boolean flag in the coordinator responsible for handling the OnBoarding flow: 
-```swift
-class AppCoordinator: Coordinator {
 
-    func start() {
-        let isFirstTimeUser = UserDefaults.standard.bool(forKey: "isFirstTimeUser")
-        
-        if (isFirstTimeUser) {
-            presentOnboarding()
-        } else {
-            presentDefaultFlow()
-        }
-    }  
-}
-``` 
