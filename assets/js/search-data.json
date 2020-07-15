@@ -2,10 +2,10 @@
   
     
         "post0": {
-            "title": "why blog?",
-            "content": "Intentions vs Goals .",
-            "url": "https://msuzoagu.github.io/blog/markdown/2020/07/14/user-defaults-onboarding.html",
-            "relUrl": "/markdown/2020/07/14/user-defaults-onboarding.html",
+            "title": "iOS Onboarding: Part One",
+            "content": "FirstTimeUser or Nah? . User Defaults . We can determine if a user is a first time user by setting boolean flags via UserDefaults, which Apple defines UserDefaults as: . An interface to the user’s defaults database, where you store key-value pairs persistently across launches of your app. . I find UserDefaults very useful for determine things like: . is a customer a first time user? | is a customer a beta tester? | .",
+            "url": "https://msuzoagu.github.io/blog/ios/2020/07/14/user-defaults-onboarding.html",
+            "relUrl": "/ios/2020/07/14/user-defaults-onboarding.html",
             "date": " • Jul 14, 2020"
         }
         
