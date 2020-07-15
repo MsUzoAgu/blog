@@ -1,8 +1,8 @@
 ---
-toc: true
+toc: false
 layout: post
 description: using user defaults for onboarding
-categories: [iOS, Swift, onboarding]
+categories: [iOS]
 title: iOS Onboarding: Part One
 ---
 # FirstTimeUser or Nah?
