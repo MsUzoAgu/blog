@@ -107,7 +107,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      2 min read
     
 </span></p>
 
@@ -127,6 +127,12 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#firsttimeuser-or-nah">FirstTimeUser or Nah?</a>
 <ul>
 <li class="toc-entry toc-h2"><a href="#user-defaults">User Defaults</a></li>
+<li class="toc-entry toc-h2"><a href="#setup">Setup</a></li>
+<li class="toc-entry toc-h2"><a href="#resetting-userdefaults">Resetting UserDefaults</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#summary">Summary</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul><h1 id="firsttimeuser-or-nah">
@@ -143,6 +149,106 @@ window.onload = wrap_img;
 <ul>
   <li>is a customer a first time user?</li>
   <li>is a customer a beta tester?</li>
+</ul>
+
+<h2 id="setup">
+<a class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h2>
+<p>We all have to deal with onboarding at some point so below are general steps to get one started.</p>
+
+<ol>
+  <li>create a boolean flag in the coordinator responsible for handling the OnBoarding flow:
+    <div class="language-swift highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="kt">AppCoordinator</span><span class="p">:</span> <span class="kt">Coordinator</span> <span class="p">{</span>
+    
+     <span class="kd">func</span> <span class="nf">start</span><span class="p">()</span> <span class="p">{</span>
+         <span class="k">let</span> <span class="nv">isFirstTimeUser</span> <span class="o">=</span> <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">bool</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"isFirstTimeUser"</span><span class="p">)</span>
+            
+         <span class="k">if</span> <span class="p">(</span><span class="n">isFirstTimeUser</span><span class="p">)</span> <span class="p">{</span>
+             <span class="nf">presentOnboarding</span><span class="p">()</span>
+         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+             <span class="nf">presentDefaultFlow</span><span class="p">()</span>
+         <span class="p">}</span>
+     <span class="p">}</span>  
+ <span class="p">}</span>
+</code></pre></div>    </div>
+    <p>Substitue coordinator for AppDelegate/SceneDelegate if you don’t follow the coordinator pattern:</p>
+
+    <div class="language-swift highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>   <span class="kd">class</span> <span class="kt">SceneDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIWindowSceneDelegate</span> <span class="p">{</span>
+    
+     <span class="c1">//MARK: Instance functions</span>
+     <span class="kd">func</span> <span class="nf">functionThatDeterminesWhatVCToPresent</span><span class="p">()</span> <span class="p">{</span>
+       <span class="k">let</span> <span class="nv">isFirstTimeUser</span> <span class="o">=</span> <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">bool</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"isFirstTimeUser"</span><span class="p">)</span>
+       <span class="k">if</span> <span class="p">(</span><span class="n">isFirstTimeUser</span><span class="p">)</span> <span class="p">{</span>
+         <span class="nf">presentOnboarding</span><span class="p">()</span>
+       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+         <span class="nf">presentDefaultFlow</span><span class="p">()</span>
+       <span class="p">}</span>
+     <span class="p">}</span>  
+   <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>you need a mechanism to indicate that the onboarding flow is complete. Typically this is accomplished via a button click. Thus in the viewcontroller responsible for handing onboarding user interactions, create an action that toggles the <code class="highlighter-rouge">isFirstTimeUser</code> boolean flag to false.</p>
+
+    <p>If you use a storyboard, the code for that would look something like this:</p>
+
+    <div class="highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code> ```swift
+ class OnboardingViewControllerOrPageController {
+
+   //MARK: - Properties
+   @IBOutlet weak var onboardingCompletedButton: UIButton!
+   ...
+   //MARK:- Actions
+   @IBOutlet func onboardingCompletedButtonTapped(_ sender: UIButton) {
+     let isFirstTimeUser = false
+     let defaults = UserDefaults.standard
+     defaults.set(isFirstTimeUser, forKey: "isFirstTimeUser")
+     //add code for what happens after boolean is switched
+   }
+ }
+ ```
+    
+ If you use programatic constraints, the code looks something like this: 
+    
+ ```swift 
+ class OnboardingViewControllerOrPageController {
+     private func whenOnBoardingCompletedButtonIsTapped() {
+         onboardingView.onboardingCompletedButton.addTarget(self, action: #selector(ActionButtonProtocol.buttonTapped(_:)), for: .touchUpInside)
+     }   
+        
+     private buttonTapped(_ sender: UIButton) {
+         let isfirstTimeUser = false
+         let defaults = UserDefaults.standard
+         defaults.set(isfirstTimeUser, forKey: "isfirstTimeUser")
+         coordinator?.onboardingCompleted()
+     }
+ }
+ ```  Note that the coordinator handles wnat to present next after onboarding is completed (via a call to `coordinator?.onboardingCompleted()` function). This is because we typicaly want to present a new ViewController (thus returning to applications default flow) at this point -  presenting any ViewController is the responsibility of a coordinator because coordinators deal with navigation flow. 
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="resetting-userdefaults">
+<a class="anchor" href="#resetting-userdefaults" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resetting UserDefaults</h2>
+<p>Discovered that <strong>UserDefaults</strong> does not have a <code class="highlighter-rouge">reset</code> function while testing. 2 options that work are:</p>
+<ul>
+  <li>
+    <p>use <code class="highlighter-rouge">removeObject</code> function to remove the key of a set value thus setting resetting the entire key-value to nil. For example: <code class="highlighter-rouge">UserDefaults.standard.removeObject(forKey: "isFirstTimeUser")</code></p>
+  </li>
+  <li>
+    <p>writing an extension. <a href="https://twitter.com/_bartjacobs">Bart Jacobs</a> has a really good post on this <a href="https://cocoacasts.com/ud-8-how-to-clear-or-reset-user-defaults-in-swift">here</a></p>
+  </li>
+</ul>
+
+<h3 id="summary">
+<a class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary</h3>
+<p>The logic followed/implemented is simple.</p>
+<ul>
+  <li>Is this a first time user?</li>
+  <li>Yes =&gt; present the onboarding flow</li>
+  <li>No =&gt; present the application’s usual flow</li>
 </ul>
 
   </div><a class="u-url" href="/blog/ios/2020/07/14/user-defaults-onboarding.html" hidden></a>
