@@ -89,14 +89,14 @@ We all have to deal with onboarding at some point so below are general steps to 
         ```
     Note that the coordinator handles wnat to present next after onboarding is completed (via a call to `coordinator?.onboardingCompleted()` function). This is because we typicaly want to present a new ViewController (thus returning to applications default flow) at this point -  presenting any ViewController is the responsibility of a coordinator because coordinators deal with navigation flow. 
 
-## Resetting UserDefaults 
-Discovered that **UserDefaults** does not have a `reset` function while testing. 2 options that work are: 
-- use `removeObject` function to remove the key of a set value thus setting resetting the entire key-value to nil. For example: `UserDefaults.standard.removeObject(forKey: "isFirstTimeUser")`
-
-- writing an extension. [Bart Jacobs](https://twitter.com/_bartjacobs) has a really good post on this [here](https://cocoacasts.com/ud-8-how-to-clear-or-reset-user-defaults-in-swift)
-
-### Summary
+## Summary
 The logic followed/implemented is simple. 
 - Is this a first time user? 
 - Yes => present the onboarding flow
 - No => present the application's usual flow
+
+### Resetting UserDefaults
+Discovered that **UserDefaults** does not have a `reset` function while testing. 2 options that work are: 
+- use `removeObject` function to remove the key of a set value thus setting resetting the entire key-value to nil. For example: `UserDefaults.standard.removeObject(forKey: "isFirstTimeUser")`
+
+- writing an extension. [Bart Jacobs](https://twitter.com/_bartjacobs) has a really good post on this [here](https://cocoacasts.com/ud-8-how-to-clear-or-reset-user-defaults-in-swift)
