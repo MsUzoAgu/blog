@@ -128,9 +128,9 @@ window.onload = wrap_img;
 <ul>
 <li class="toc-entry toc-h2"><a href="#user-defaults">User Defaults</a></li>
 <li class="toc-entry toc-h2"><a href="#setup">Setup</a></li>
-<li class="toc-entry toc-h2"><a href="#resetting-userdefaults">Resetting UserDefaults</a>
+<li class="toc-entry toc-h2"><a href="#summary">Summary</a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#summary">Summary</a></li>
+<li class="toc-entry toc-h3"><a href="#resetting-userdefaults">Resetting UserDefaults</a></li>
 </ul>
 </li>
 </ul>
@@ -230,8 +230,17 @@ window.onload = wrap_img;
   </li>
 </ol>
 
-<h2 id="resetting-userdefaults">
-<a class="anchor" href="#resetting-userdefaults" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resetting UserDefaults</h2>
+<h2 id="summary">
+<a class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary</h2>
+<p>The logic followed/implemented is simple.</p>
+<ul>
+  <li>Is this a first time user?</li>
+  <li>Yes =&gt; present the onboarding flow</li>
+  <li>No =&gt; present the application’s usual flow</li>
+</ul>
+
+<h3 id="resetting-userdefaults">
+<a class="anchor" href="#resetting-userdefaults" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resetting UserDefaults</h3>
 <p>Discovered that <strong>UserDefaults</strong> does not have a <code class="highlighter-rouge">reset</code> function while testing. 2 options that work are:</p>
 <ul>
   <li>
@@ -240,15 +249,6 @@ window.onload = wrap_img;
   <li>
     <p>writing an extension. <a href="https://twitter.com/_bartjacobs">Bart Jacobs</a> has a really good post on this <a href="https://cocoacasts.com/ud-8-how-to-clear-or-reset-user-defaults-in-swift">here</a></p>
   </li>
-</ul>
-
-<h3 id="summary">
-<a class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary</h3>
-<p>The logic followed/implemented is simple.</p>
-<ul>
-  <li>Is this a first time user?</li>
-  <li>Yes =&gt; present the onboarding flow</li>
-  <li>No =&gt; present the application’s usual flow</li>
 </ul>
 
   </div><a class="u-url" href="/blog/ios/2020/07/14/user-defaults-onboarding.html" hidden></a>
