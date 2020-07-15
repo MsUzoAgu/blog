@@ -1,8 +1,8 @@
 ---
 toc: true
 layout: post
-description: the unhappy failure of pious resolves 
-categories: [markdown]
-title: why blog?
+description: using user defaults for onboarding
+categories: [iOS]
+title: iOS Onboarding: Part One
 ---
 # Intentions vs Goals
