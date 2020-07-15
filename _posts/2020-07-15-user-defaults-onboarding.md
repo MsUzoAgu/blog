@@ -19,37 +19,36 @@ I find **UserDefaults** very useful for determine things like:
 We all have to deal with onboarding at some point so below are general steps to get one started.
 
 1. create a boolean flag in the coordinator responsible for handling the OnBoarding flow: 
-    ```swift
-    class AppCoordinator: Coordinator {
-    
-        func start() {
-            let isFirstTimeUser = UserDefaults.standard.bool(forKey: "isFirstTimeUser")
-            
-            if (isFirstTimeUser) {
-                presentOnboarding()
-            } else {
-                presentDefaultFlow()
-            }
-        }  
-    }
-    ``` 
+```swift
+class AppCoordinator: Coordinator {
 
-    Substitue coordinator for AppDelegate/SceneDelegate if you don't follow the coordinator pattern:
-    
-    ```swift 
-    class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
-      //MARK: Instance functions
-      func functionThatDeterminesWhatVCToPresent() {
+    func start() {
         let isFirstTimeUser = UserDefaults.standard.bool(forKey: "isFirstTimeUser")
+        
         if (isFirstTimeUser) {
-          presentOnboarding()
+            presentOnboarding()
         } else {
-          presentDefaultFlow()
+            presentDefaultFlow()
         }
-      }  
+    }  
+}
+``` 
+Substitue coordinator for AppDelegate/SceneDelegate if you don't follow the coordinator pattern:
+  
+```swift 
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+  //MARK: Instance functions
+  func functionThatDeterminesWhatVCToPresent() {
+    let isFirstTimeUser = UserDefaults.standard.bool(forKey: "isFirstTimeUser")
+    if (isFirstTimeUser) {
+      presentOnboarding()
+    } else {
+      presentDefaultFlow()
     }
-    ```
+  }  
+}
+```
 
 2. you need a mechanism to indicate that the onboarding flow is complete. Typically this is accomplished via a button click. Thus in the viewcontroller responsible for handing onboarding user interactions, create an action that toggles the `isFirstTimeUser` boolean flag to false. 
 
