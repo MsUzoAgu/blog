@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://msuzoagu.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://msuzoagu.github.io/blog/" rel="alternate" type="text/html" /><updated>2020-07-15T20:44:55-05:00</updated><id>https://msuzoagu.github.io/blog/feed.xml</id><title type="html">mua</title><subtitle>notes at the intersection of technology, art, and humanities</subtitle><entry><title type="html">iOS Onboarding: Part One</title><link href="https://msuzoagu.github.io/blog/ios/2020/07/14/user-defaults-onboarding.html" rel="alternate" type="text/html" title="iOS Onboarding: Part One" /><published>2020-07-14T00:00:00-05:00</published><updated>2020-07-14T00:00:00-05:00</updated><id>https://msuzoagu.github.io/blog/ios/2020/07/14/user-defaults-onboarding</id><content type="html" xml:base="https://msuzoagu.github.io/blog/ios/2020/07/14/user-defaults-onboarding.html">&lt;h1 id=&quot;firsttimeuser-or-nah&quot;&gt;FirstTimeUser or Nah?&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://msuzoagu.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://msuzoagu.github.io/blog/" rel="alternate" type="text/html" /><updated>2020-07-15T20:48:16-05:00</updated><id>https://msuzoagu.github.io/blog/feed.xml</id><title type="html">mua</title><subtitle>notes at the intersection of technology, art, and humanities</subtitle><entry><title type="html">iOS Onboarding: Part One</title><link href="https://msuzoagu.github.io/blog/ios/2020/07/14/user-defaults-onboarding.html" rel="alternate" type="text/html" title="iOS Onboarding: Part One" /><published>2020-07-14T00:00:00-05:00</published><updated>2020-07-14T00:00:00-05:00</updated><id>https://msuzoagu.github.io/blog/ios/2020/07/14/user-defaults-onboarding</id><content type="html" xml:base="https://msuzoagu.github.io/blog/ios/2020/07/14/user-defaults-onboarding.html">&lt;h1 id=&quot;firsttimeuser-or-nah&quot;&gt;FirstTimeUser or Nah?&lt;/h1&gt;
 
 &lt;h2 id=&quot;user-defaults&quot;&gt;User Defaults&lt;/h2&gt;
 &lt;p&gt;We can determine if a user is a first time user by setting boolean flags via &lt;strong&gt;UserDefaults&lt;/strong&gt;, which Apple defines &lt;a href=&quot;https://developer.apple.com/documentation/foundation/userdefaults&quot;&gt;UserDefaults&lt;/a&gt; as:&lt;/p&gt;
@@ -50,43 +50,39 @@
 
 &lt;p&gt;If you use a storyboard, the code for that would look something like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;```swift
-class OnboardingViewControllerOrPageController {
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;OnboardingViewControllerOrPageController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
-  //MARK: - Properties
-  @IBOutlet weak var onboardingCompletedButton: UIButton!
-  ...
-  //MARK:- Actions
-  @IBOutlet func onboardingCompletedButtonTapped(_ sender: UIButton) {
-    let isFirstTimeUser = false
-    let defaults = UserDefaults.standard
-    defaults.set(isFirstTimeUser, forKey: &quot;isFirstTimeUser&quot;)
-    //add code for what happens after boolean is switched
-  }
-}
-```
+    &lt;span class=&quot;c1&quot;&gt;//MARK: - Properties&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;@IBOutlet&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;onboardingCompletedButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//MARK:- Actions&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;@IBOutlet&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onboardingCompletedButtonTapped&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;isFirstTimeUser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;defaults&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;standard&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;defaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isFirstTimeUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;forKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;isFirstTimeUser&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;//add code for what happens after boolean is switched&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;If you use programatic constraints, the code looks something like this:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;```swift 
-class OnboardingViewControllerOrPageController {
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;OnboardingViewControllerOrPageController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
 
-    private func whenOnBoardingCompletedButtonIsTapped() {
-        onboardingView.onboardingCompletedButton.addTarget(self, action: #selector(ActionButtonProtocol.buttonTapped(_:)), for: .touchUpInside)
-    }   
-    
-    private buttonTapped(_ sender: UIButton) {
-        let isfirstTimeUser = false
-        let defaults = UserDefaults.standard
-        defaults.set(isfirstTimeUser, forKey: &quot;isfirstTimeUser&quot;)
-        coordinator?.onboardingCompleted()
-    }
-}
-```
-  
-Note that the coordinator handles wnat to present next after onboarding is completed (via a call to `coordinator?.onboardingCompleted()` function). This is because we typicaly want to present a new ViewController (thus returning to applications default flow) at this point -  presenting any ViewController is the responsibility of a coordinator because coordinators deal with navigation flow. 
+      &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;whenOnBoardingCompletedButtonIsTapped&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;onboardingView&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;onboardingCompletedButton&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;addTarget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#selector(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ActionButtonProtocol.buttonTapped(_:)&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;touchUpInside&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;   
+      
+      &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;buttonTapped&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;sender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;isfirstTimeUser&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;defaults&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;standard&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;defaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isfirstTimeUser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;forKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;isfirstTimeUser&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;coordinator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;onboardingCompleted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that the coordinator handles wnat to present next after onboarding is completed (via a call to &lt;code class=&quot;highlighter-rouge&quot;&gt;coordinator?.onboardingCompleted()&lt;/code&gt; function). This is because we typicaly want to present a new ViewController (thus returning to applications default flow) at this point -  presenting any ViewController is the responsibility of a coordinator because coordinators deal with navigation flow.&lt;/p&gt;
 
 &lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
 &lt;p&gt;The logic followed/implemented is simple.&lt;/p&gt;
