@@ -191,36 +191,28 @@ window.onload = wrap_img;
 </ol>
 
 <p>If you use a storyboard, the code for that would look something like this:</p>
-
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="kt">OnboardingViewControllerOrPageController</span> <span class="p">{</span>
-
-    <span class="c1">//MARK: - Properties</span>
     <span class="kd">@IBOutlet</span> <span class="k">weak</span> <span class="k">var</span> <span class="nv">onboardingCompletedButton</span><span class="p">:</span> <span class="kt">UIButton</span><span class="o">!</span>
-    <span class="o">...</span>
-    <span class="c1">//MARK:- Actions</span>
+
     <span class="kd">@IBOutlet</span> <span class="kd">func</span> <span class="nf">onboardingCompletedButtonTapped</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">let</span> <span class="nv">isFirstTimeUser</span> <span class="o">=</span> <span class="kc">false</span>
       <span class="k">let</span> <span class="nv">defaults</span> <span class="o">=</span> <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span>
       <span class="n">defaults</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="n">isFirstTimeUser</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"isFirstTimeUser"</span><span class="p">)</span>
-      <span class="c1">//add code for what happens after boolean is switched</span>
     <span class="p">}</span>
   <span class="p">}</span>
 </code></pre></div></div>
-
 <p>If you use programatic constraints, the code looks something like this:</p>
-
 <div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="kt">OnboardingViewControllerOrPageController</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">whenOnBoardingCompletedButtonIsTapped</span><span class="p">()</span> <span class="p">{</span>
+      <span class="n">onboardingView</span><span class="o">.</span><span class="n">onboardingCompletedButton</span><span class="o">.</span><span class="nf">addTarget</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">#selector(</span><span class="nf">ActionButtonProtocol.buttonTapped(_:)</span><span class="kd">)</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">touchUpInside</span><span class="p">)</span>
+    <span class="p">}</span>
 
-      <span class="kd">private</span> <span class="kd">func</span> <span class="nf">whenOnBoardingCompletedButtonIsTapped</span><span class="p">()</span> <span class="p">{</span>
-          <span class="n">onboardingView</span><span class="o">.</span><span class="n">onboardingCompletedButton</span><span class="o">.</span><span class="nf">addTarget</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">action</span><span class="p">:</span> <span class="kd">#selector(</span><span class="nf">ActionButtonProtocol.buttonTapped(_:)</span><span class="kd">)</span><span class="p">,</span> <span class="nv">for</span><span class="p">:</span> <span class="o">.</span><span class="n">touchUpInside</span><span class="p">)</span>
-      <span class="p">}</span>   
-      
-      <span class="kd">private</span> <span class="nf">buttonTapped</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span> <span class="p">{</span>
-          <span class="k">let</span> <span class="nv">isfirstTimeUser</span> <span class="o">=</span> <span class="kc">false</span>
-          <span class="k">let</span> <span class="nv">defaults</span> <span class="o">=</span> <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span>
-          <span class="n">defaults</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="n">isfirstTimeUser</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"isfirstTimeUser"</span><span class="p">)</span>
-          <span class="n">coordinator</span><span class="p">?</span><span class="o">.</span><span class="nf">onboardingCompleted</span><span class="p">()</span>
-      <span class="p">}</span>
+    <span class="kd">private</span> <span class="nf">buttonTapped</span><span class="p">(</span><span class="n">_</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">let</span> <span class="nv">isfirstTimeUser</span> <span class="o">=</span> <span class="kc">false</span>
+      <span class="k">let</span> <span class="nv">defaults</span> <span class="o">=</span> <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span>
+      <span class="n">defaults</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="n">isfirstTimeUser</span><span class="p">,</span> <span class="nv">forKey</span><span class="p">:</span> <span class="s">"isfirstTimeUser"</span><span class="p">)</span>
+      <span class="n">coordinator</span><span class="p">?</span><span class="o">.</span><span class="nf">onboardingCompleted</span><span class="p">()</span>
+    <span class="p">}</span>
   <span class="p">}</span>
 </code></pre></div></div>
 
