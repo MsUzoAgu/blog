@@ -158,77 +158,77 @@ window.onload = wrap_img;
 <ol>
   <li>create a boolean flag in the coordinator responsible for handling the OnBoarding flow:
     <div class="language-swift highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="kt">AppCoordinator</span><span class="p">:</span> <span class="kt">Coordinator</span> <span class="p">{</span>
-    
-     <span class="kd">func</span> <span class="nf">start</span><span class="p">()</span> <span class="p">{</span>
-         <span class="k">let</span> <span class="nv">isFirstTimeUser</span> <span class="o">=</span> <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">bool</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"isFirstTimeUser"</span><span class="p">)</span>
-            
-         <span class="k">if</span> <span class="p">(</span><span class="n">isFirstTimeUser</span><span class="p">)</span> <span class="p">{</span>
-             <span class="nf">presentOnboarding</span><span class="p">()</span>
-         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-             <span class="nf">presentDefaultFlow</span><span class="p">()</span>
-         <span class="p">}</span>
-     <span class="p">}</span>  
- <span class="p">}</span>
+<div class="highlight"><pre class="highlight"><code>  <span class="kd">class</span> <span class="kt">AppCoordinator</span><span class="p">:</span> <span class="kt">Coordinator</span> <span class="p">{</span>
+  
+   <span class="kd">func</span> <span class="nf">start</span><span class="p">()</span> <span class="p">{</span>
+       <span class="k">let</span> <span class="nv">isFirstTimeUser</span> <span class="o">=</span> <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">bool</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"isFirstTimeUser"</span><span class="p">)</span>
+          
+       <span class="k">if</span> <span class="p">(</span><span class="n">isFirstTimeUser</span><span class="p">)</span> <span class="p">{</span>
+           <span class="nf">presentOnboarding</span><span class="p">()</span>
+       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+           <span class="nf">presentDefaultFlow</span><span class="p">()</span>
+       <span class="p">}</span>
+   <span class="p">}</span>  
+  <span class="p">}</span>
 </code></pre></div>    </div>
     <p>Substitue coordinator for AppDelegate/SceneDelegate if you don’t follow the coordinator pattern:</p>
 
     <div class="language-swift highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code>   <span class="kd">class</span> <span class="kt">SceneDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIWindowSceneDelegate</span> <span class="p">{</span>
-    
-     <span class="c1">//MARK: Instance functions</span>
-     <span class="kd">func</span> <span class="nf">functionThatDeterminesWhatVCToPresent</span><span class="p">()</span> <span class="p">{</span>
-       <span class="k">let</span> <span class="nv">isFirstTimeUser</span> <span class="o">=</span> <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">bool</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"isFirstTimeUser"</span><span class="p">)</span>
-       <span class="k">if</span> <span class="p">(</span><span class="n">isFirstTimeUser</span><span class="p">)</span> <span class="p">{</span>
-         <span class="nf">presentOnboarding</span><span class="p">()</span>
-       <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-         <span class="nf">presentDefaultFlow</span><span class="p">()</span>
-       <span class="p">}</span>
-     <span class="p">}</span>  
-   <span class="p">}</span>
+<div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="kt">SceneDelegate</span><span class="p">:</span> <span class="kt">UIResponder</span><span class="p">,</span> <span class="kt">UIWindowSceneDelegate</span> <span class="p">{</span>
+  
+   <span class="kd">func</span> <span class="nf">functionThatDeterminesWhatVCToPresent</span><span class="p">()</span> <span class="p">{</span>
+     <span class="k">let</span> <span class="nv">isFirstTimeUser</span> <span class="o">=</span> <span class="kt">UserDefaults</span><span class="o">.</span><span class="n">standard</span><span class="o">.</span><span class="nf">bool</span><span class="p">(</span><span class="nv">forKey</span><span class="p">:</span> <span class="s">"isFirstTimeUser"</span><span class="p">)</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">isFirstTimeUser</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nf">presentOnboarding</span><span class="p">()</span>
+     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="nf">presentDefaultFlow</span><span class="p">()</span>
+     <span class="p">}</span>
+   <span class="p">}</span>  
+ <span class="p">}</span>
 </code></pre></div>    </div>
   </li>
-  <li>
-    <p>you need a mechanism to indicate that the onboarding flow is complete. Typically this is accomplished via a button click. Thus in the viewcontroller responsible for handing onboarding user interactions, create an action that toggles the <code class="highlighter-rouge">isFirstTimeUser</code> boolean flag to false.</p>
-
-    <p>If you use a storyboard, the code for that would look something like this:</p>
-
-    <div class="highlighter-rouge">
-<div class="highlight"><pre class="highlight"><code> ```swift
- class OnboardingViewControllerOrPageController {
-
-   //MARK: - Properties
-   @IBOutlet weak var onboardingCompletedButton: UIButton!
-   ...
-   //MARK:- Actions
-   @IBOutlet func onboardingCompletedButtonTapped(_ sender: UIButton) {
-     let isFirstTimeUser = false
-     let defaults = UserDefaults.standard
-     defaults.set(isFirstTimeUser, forKey: "isFirstTimeUser")
-     //add code for what happens after boolean is switched
-   }
- }
- ```
-    
- If you use programatic constraints, the code looks something like this: 
-    
- ```swift 
- class OnboardingViewControllerOrPageController {
-     private func whenOnBoardingCompletedButtonIsTapped() {
-         onboardingView.onboardingCompletedButton.addTarget(self, action: #selector(ActionButtonProtocol.buttonTapped(_:)), for: .touchUpInside)
-     }   
-        
-     private buttonTapped(_ sender: UIButton) {
-         let isfirstTimeUser = false
-         let defaults = UserDefaults.standard
-         defaults.set(isfirstTimeUser, forKey: "isfirstTimeUser")
-         coordinator?.onboardingCompleted()
-     }
- }
- ```  Note that the coordinator handles wnat to present next after onboarding is completed (via a call to `coordinator?.onboardingCompleted()` function). This is because we typicaly want to present a new ViewController (thus returning to applications default flow) at this point -  presenting any ViewController is the responsibility of a coordinator because coordinators deal with navigation flow. 
-</code></pre></div>    </div>
-  </li>
+  <li>you need a mechanism to indicate that the onboarding flow is complete. Typically this is accomplished via a button click. Thus in the viewcontroller responsible for handing onboarding user interactions, create an action that toggles the <code class="highlighter-rouge">isFirstTimeUser</code> boolean flag to false.</li>
 </ol>
+
+<p>If you use a storyboard, the code for that would look something like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```swift
+class OnboardingViewControllerOrPageController {
+
+  //MARK: - Properties
+  @IBOutlet weak var onboardingCompletedButton: UIButton!
+  ...
+  //MARK:- Actions
+  @IBOutlet func onboardingCompletedButtonTapped(_ sender: UIButton) {
+    let isFirstTimeUser = false
+    let defaults = UserDefaults.standard
+    defaults.set(isFirstTimeUser, forKey: "isFirstTimeUser")
+    //add code for what happens after boolean is switched
+  }
+}
+```
+</code></pre></div></div>
+
+<p>If you use programatic constraints, the code looks something like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```swift 
+class OnboardingViewControllerOrPageController {
+
+    private func whenOnBoardingCompletedButtonIsTapped() {
+        onboardingView.onboardingCompletedButton.addTarget(self, action: #selector(ActionButtonProtocol.buttonTapped(_:)), for: .touchUpInside)
+    }   
+    
+    private buttonTapped(_ sender: UIButton) {
+        let isfirstTimeUser = false
+        let defaults = UserDefaults.standard
+        defaults.set(isfirstTimeUser, forKey: "isfirstTimeUser")
+        coordinator?.onboardingCompleted()
+    }
+}
+```
+  
+Note that the coordinator handles wnat to present next after onboarding is completed (via a call to `coordinator?.onboardingCompleted()` function). This is because we typicaly want to present a new ViewController (thus returning to applications default flow) at this point -  presenting any ViewController is the responsibility of a coordinator because coordinators deal with navigation flow. 
+</code></pre></div></div>
 
 <h2 id="summary">
 <a class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary</h2>
