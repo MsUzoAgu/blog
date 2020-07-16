@@ -52,43 +52,43 @@ We all have to deal with onboarding at some point so below are general steps to 
 
 2. you need a mechanism to indicate that the onboarding flow is complete. Typically this is accomplished via a button click. Thus in the viewcontroller responsible for handing onboarding user interactions, create an action that toggles the `isFirstTimeUser` boolean flag to false. 
 
-  If you use a storyboard, the code for that would look something like this:
+If you use a storyboard, the code for that would look something like this:
         
-    ```swift
-    class OnboardingViewControllerOrPageController {
+  ```swift
+  class OnboardingViewControllerOrPageController {
 
-      //MARK: - Properties
-      @IBOutlet weak var onboardingCompletedButton: UIButton!
-      ...
-      //MARK:- Actions
-      @IBOutlet func onboardingCompletedButtonTapped(_ sender: UIButton) {
-        let isFirstTimeUser = false
-        let defaults = UserDefaults.standard
-        defaults.set(isFirstTimeUser, forKey: "isFirstTimeUser")
-        //add code for what happens after boolean is switched
-      }
+    //MARK: - Properties
+    @IBOutlet weak var onboardingCompletedButton: UIButton!
+    ...
+    //MARK:- Actions
+    @IBOutlet func onboardingCompletedButtonTapped(_ sender: UIButton) {
+      let isFirstTimeUser = false
+      let defaults = UserDefaults.standard
+      defaults.set(isFirstTimeUser, forKey: "isFirstTimeUser")
+      //add code for what happens after boolean is switched
     }
-    ```
+  }
+  ```
         
   If you use programatic constraints, the code looks something like this: 
         
-    ```swift 
-    class OnboardingViewControllerOrPageController {
+  ```swift 
+  class OnboardingViewControllerOrPageController {
 
-        private func whenOnBoardingCompletedButtonIsTapped() {
-            onboardingView.onboardingCompletedButton.addTarget(self, action: #selector(ActionButtonProtocol.buttonTapped(_:)), for: .touchUpInside)
-        }   
-        
-        private buttonTapped(_ sender: UIButton) {
-            let isfirstTimeUser = false
-            let defaults = UserDefaults.standard
-            defaults.set(isfirstTimeUser, forKey: "isfirstTimeUser")
-            coordinator?.onboardingCompleted()
-        }
-    }
-    ```
+      private func whenOnBoardingCompletedButtonIsTapped() {
+          onboardingView.onboardingCompletedButton.addTarget(self, action: #selector(ActionButtonProtocol.buttonTapped(_:)), for: .touchUpInside)
+      }   
+      
+      private buttonTapped(_ sender: UIButton) {
+          let isfirstTimeUser = false
+          let defaults = UserDefaults.standard
+          defaults.set(isfirstTimeUser, forKey: "isfirstTimeUser")
+          coordinator?.onboardingCompleted()
+      }
+  }
+  ```
   
-    Note that the coordinator handles wnat to present next after onboarding is completed (via a call to `coordinator?.onboardingCompleted()` function). This is because we typicaly want to present a new ViewController (thus returning to applications default flow) at this point -  presenting any ViewController is the responsibility of a coordinator because coordinators deal with navigation flow. 
+  Note that the coordinator handles wnat to present next after onboarding is completed (via a call to `coordinator?.onboardingCompleted()` function). This is because we typicaly want to present a new ViewController (thus returning to applications default flow) at this point -  presenting any ViewController is the responsibility of a coordinator because coordinators deal with navigation flow. 
 
 ## Summary
 The logic followed/implemented is simple. 
